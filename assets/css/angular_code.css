@@ -1,0 +1,54 @@
+	input.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	textarea.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	select.ng-invalid.ng-dirty{
+	border: 2px solid #d9534f;
+	}
+	input.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	textarea.ng-valid.ng-dirty{
+	border: 2px solid #5cb85c;
+	}
+	select.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	.input-lg.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.input-lg.ng-valid.ng-dirty{
+	border: 2px solid #5cb85c;
+	}
+	.row-row-sign-in input.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.row-row-sign-in textarea.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.row-row-sign-in input.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	.row-row-sign-in textarea.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	.col3-pbl input.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.col3-pbl textarea.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.col3-pbl input.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	.col3-pbl textarea.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}
+	.col3-pbl-ui input.ng-invalid.ng-dirty{
+		border: 2px solid #d9534f;
+	}
+	.col3-pbl-ui input.ng-valid.ng-dirty{
+		border: 2px solid #5cb85c;
+	}

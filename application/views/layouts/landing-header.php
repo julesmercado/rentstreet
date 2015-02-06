@@ -20,8 +20,7 @@
     <link href=
     "http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
     rel="stylesheet" type="text/css">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type=
-    "text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-latest.min.js'); ?>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

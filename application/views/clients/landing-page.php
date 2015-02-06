@@ -108,11 +108,13 @@
                          
 
                         <div class="row row-top-margin">
-                            <div class="col-md-6">
-                                <p>{{data.title}}</p>
+                            <div class="col-md-12">
+                                <p class="title-sr">{{data.title}}</p>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <p class="price-hp">₱ {{data.price}} | {{data.mode}} </p>
                             </div>
                         </div>
@@ -164,37 +166,37 @@
                 <div class="col-lg-12">
                     <ul class="list-inline">
                         <li>
-                            <a href="#home">About Us</a>
+                            <a class="footer-li" href="#home">About Us</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#about">Rules</a>
+                            <a class="footer-li" href="#about">Rules</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#services">Rent Safely</a>
+                            <a class="footer-li" href="#services">Rent Safely</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Costumer Services</a>
+                            <a class="footer-li" href="#contact">Costumer Services</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Careers</a>
+                            <a class="footer-li" href="#contact">Careers</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Help</a>
+                            <a class="footer-li" href="#contact">Help</a>
                         </li>
                     </ul>
 

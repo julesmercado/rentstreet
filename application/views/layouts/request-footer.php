@@ -1,5 +1,4 @@
 <!-- jQuery -->
-
     <script src="<?php echo base_url('assets/js/angular.min.js'); ?>" type=
     "text/javascript"></script>
     <script src="<?php echo base_url('assets/js/angular-sanitize.min.js'); ?>"></script> 

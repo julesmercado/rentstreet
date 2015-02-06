@@ -201,6 +201,29 @@ session_start(); //we need to call PHP's session object to access it through CI
 			}
 		}
 
+		public function rateIfReturn($rentedId){
+			if($this->session->userdata('logged_in')){
+				$session_data = $this->session->userdata('logged_in');
+				$data = array(
+					'user_id' => $session_data['user_id'],
+					'email' => $session_data['email'],
+					'username' => $session_data['username'],
+					'password' => $session_data['password'],
+					'name' => $session_data['name'],
+					'contact' => $session_data['contact'],
+					'address' => $session_data['address'],
+					'images' => $session_data['images'],
+					'rentedId' => $rentedId
+					);
+				$this->load->view('layouts/rate-after-return-header');
+				$this->load->view('items/rate-after-return',$data);
+				$this->load->view('layouts/rate-after-return-footer');
+			} else {
+				redirect('landing-page');
+			}
+		}
+
+
 		public function myAdsView(){
 			if($this->session->userdata('logged_in')){
 				$session_data = $this->session->userdata('logged_in');
@@ -422,9 +445,10 @@ session_start(); //we need to call PHP's session object to access it through CI
 
 		}
 
+
 		public function cancelRequest(){
 
-			$status = 'Canceled';
+			$status = 4;
 
 			$post = json_decode(file_get_contents('php://input'));
 			$updateStatus = $this->rent_model->updateStatusRequest($post, $status);
@@ -433,6 +457,22 @@ session_start(); //we need to call PHP's session object to access it through CI
 			echo json_encode( $updateStatus );
 
 		}
+
+
+
+
+		public function declineRequest(){
+
+			$status = 4;
+
+			 $post = json_decode(file_get_contents('php://input'));
+			 $updateStatus = $this->rent_model->updateStatusRequest($post, $status);
+			 $deleteRequest = $this->rent_model->itemRequestCancel($post);
+
+			echo json_encode( $post );
+
+		}
+
 
 		public function viewOtherProfile($borrowers_id){
 			if($this->session->userdata('logged_in')){

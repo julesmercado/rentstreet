@@ -81,20 +81,21 @@
 			$this->form_validation->set_rules('description','Ad Description','trim|required|xss_clean|min_length[10]');
 
 			if($this->form_validation->run()){
-
+				$status =1;
 		        $id = $this->input->post('user_id');
 	            $data = array(
-	            	'cat_id' => $this->input->post('category',true),
+	            	'cat_id' => $this->input->post('category_id',true),
 	            	'location' => ucwords($this->input->post('location',true)),
 	            	'price' => $this->input->post('price',true),
-	            	'daily' => $this->input->post('daily',true),
+	            	'mode' =>  $this->input->post('modePayment',true),
 	            	'title' => ucwords($this->input->post('title',true)),
 	            	'description' => $this->input->post('description',true),
-	            	'status'	  => $this->input->post('status',true),
+	            	'status'	  => $status,
 	            	'created_on'  => date('Y-m-d'),
 	        	    'user_id' 	  => $id
 	            );
-	            print_r($data);
+	           
+	            var_dump($data);
 	            $confirm = $this->rent_model->uploadItem($data);
 	        	
 	           if($confirm)
@@ -137,6 +138,16 @@
 	        } else {
 	        	redirect('landing-page');
 	        }
+		}
+
+		public function getSingleItem(){
+			$post = json_decode(file_get_contents('php://input'));
+			$data = $this->rent_model->getDetails($post);
+
+			$data->created_on = date('F d, Y', strtotime($data->created_on));
+
+			echo json_encode($data);
+
 		}
 
 		public function viewDetails($id){
@@ -212,6 +223,13 @@
 			echo json_encode($data);
 		}
 
+		public function getMode(){
+			$post = json_decode(file_get_contents('php://input'));
+			$data = $this->rent_model->getModePayment();
+
+			echo json_encode($data);
+		}	
+
 		public function countNotification(){
 			$post = json_decode(file_get_contents('php://input'));
 			$data = $this->rent_model->getCountNotification($post);
@@ -250,6 +268,10 @@
 		public function getOtherInfo(){
 			$post = json_decode(file_get_contents('php://input'));
 			$data = $this->rent_model->getSingleInfo($post);
+
+			$data[0]->registered_on = date('F d, Y', strtotime($data[0]->registered_on));
+			$data[0]->last_login = date('F d, Y', strtotime($data[0]->last_login));
+
 			echo json_encode($data);
 		}
 
@@ -265,11 +287,36 @@
 			echo json_encode($data);
 		}
 
+		public function getRateAfterReturnInfo(){
+			$post = json_decode(file_get_contents('php://input'));
+			$data = $this->rent_model->getRateAfterReturnInfor($post);
+			echo json_encode($data);
+		}
+
+		public function getBorrowedFromOther(){
+			$post = json_decode(file_get_contents('php://input'));
+			$data = $this->rent_model->getBorrowedFromOther($post);
+			// $ownersInfo = $this->rent_model->getOwnersInfo($data[0]->owners_id);
+
+
+
+			//  $data['owners_name'] = $ownersInfo;
+
+			echo json_encode($data);
+		}
+
+		public function getMyReturnedAds(){
+			$post = json_decode(file_get_contents('php://input'));
+			$data = $this->rent_model->getMyReturned($post);
+			echo json_encode($data);
+		}
+
 		public function acceptRequest(){
 
-			$status = 'Approved';
+			$status = 2;
 
 			$post = json_decode(file_get_contents('php://input'));
+			$updateStatusitems = $this->rent_model->updateItemStatus($post, $status);
 			$updateStatus = $this->rent_model->updateStatusRequest($post, $status);
 			$queryNotification = $this->rent_model->selectNotification($post);
 
@@ -277,6 +324,7 @@
 				'owners_id' => $queryNotification[0]->owners_id, 
 				'borrowers_id' => $queryNotification[0]->borrowers_id,
 				'items_id' => $queryNotification[0]->items_id,
+				'status' => $status,
 				'date_from' => $queryNotification[0]->date_from,
 				'date_to' => $queryNotification[0]->date_to,
 				'date_accepted' => date('Y-m-d')
@@ -288,6 +336,19 @@
 	
 
 		}
+
+		public function returnItems(){
+			$status = 1;
+
+			$post = json_decode(file_get_contents('php://input'));
+			$updateStatusitems = $this->rent_model->updateItemStatusFromRented($post, $status);
+			$deleteFromRemted = $this->rent_model->deleteRentedItems($post);
+
+
+		}
+
+
+
 
 		private function flashMessages($data){
         $this->session->set_flashdata('notify', $data['msg']);

@@ -19,8 +19,7 @@
     <link href=
     "http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
     rel="stylesheet" type="text/css">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type=
-    "text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-latest.min.js'); ?>"></script>
 
     <link rel="stylesheet" href="<?php echo base_url('assets/css/responsive-cuz.css'); ?>" media="screen and (min-width:0px)">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/responsive-cuz-2.css'); ?>" media="screen and (min-width:768px)">
@@ -31,4 +30,4 @@
 
 </head>
 
-<body ng-controller="myController">
+<body ng-controller="myController" ng-init="getCatOnly()">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -10,11 +10,11 @@
 
     <title><?php echo $title; ?></title><!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/landing-page.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/app.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/landing-page.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type=
-    "text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-latest.min.js'); ?>"></script>
+    
     <script src="<?php echo base_url('assets/js/script.js'); ?>"></script><!-- Custom CSS -->
     <!-- Custom Fonts -->
     <link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type=
@@ -28,9 +28,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="<?php echo base_url('assets/css/star-rating.css'); ?>" media="all" rel="stylesheet" type=
-    "text/css">
-    <script src="<?php echo base_url('assets/js/star-rating.js'); ?>" type="text/javascript"></script>
 </head>
 
-<body>
+<body ng-controller="myController" ng-init="getCatOnly()">

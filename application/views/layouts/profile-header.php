@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -10,11 +10,10 @@
 
     <title><?php echo $title; ?></title><!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/landing-page.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/app.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/landing-page.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type=
-    "text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-latest.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/script.js'); ?>"></script><!-- Custom CSS -->
     <!-- Custom Fonts -->
     <link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type=
@@ -30,4 +29,4 @@
     <![endif]-->
 </head>
 
-<body>
+<body ng-controller="myController" ng-init="getCatOnly()">

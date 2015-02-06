@@ -92,19 +92,25 @@
                 <hr class="intro-divider">
             </div>
 
+            <div class="row">
+                <div class="col-md-12 search-item-bi">
+                    <input class="text" placeholder="Search Borrowed Item..." type="text">
+                </div>
+            </div>
+
             <div class="row row-dash-mp">
                 <div class="container">
                     <div class="row container-mp">
                         <div class="col-md-3">
-                        <div class=" panel panel-default">
-                        <div class="panel-heading p-heading-d-mp">
+                        <div class=" panel panel-default panel-body-cuz">
+                        <div class="panel-heading p-heading-d-mp ">
                             DASHBOARD
                         </div>
 
-                        <div class="panel-body panel-body-cuz">
-                            <ul class="nav nav-pills nav-stacked ul-cuz">
+                        <div class="panel-body ">
+                            <ul class="nav nav-pills nav-pills-cuz nav-stacked ul-cuz">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large tab-space"></i>ADVERTISEMENTS</a>
+                                    <a href="#" class="dropdown-toggle dash-a" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large tab-space"></i>ADVERTISEMENTS</a>
                                     <ul class="dropdown-menu dropdown-menu-cuz">
                                       
                                         <li>
@@ -116,23 +122,26 @@
                                         <li>
                                             <a href='<?php echo base_url('returned-items'); ?>'><i class="glyphicon glyphicon-indent-left tab-space"></i>RETURNED ITEMS</a>
                                         </li>
+                                        <li>
+                                            <a href='<?php echo base_url('upload-items'); ?>'><i class="glyphicon glyphicon-indent-left tab-space"></i>POST YOUR ITEM</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href='<?php echo base_url('my-ads'); ?>'><i class="glyphicon glyphicon-tags tab-space"></i>MANAGE ADS</a>
+                                    <a href='<?php echo base_url('my-ads'); ?>' class="dash-a"><i class="glyphicon glyphicon-tags tab-space"></i>MANAGE ADS</a>
                                 </li>
 
                                 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-share tab-space"></i>RETURN ITEMS</a>
+                                    <a href="#" class="dash-a"><i class="glyphicon glyphicon-share tab-space"></i>RETURN ITEMS</a>
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo base_url('my-profile'); ?>"><i class="glyphicon glyphicon-user tab-space"></i>PROFILE</a>
+                                    <a href="<?php echo base_url('my-profile'); ?>" class="dash-a"><i class="glyphicon glyphicon-user tab-space"></i>PROFILE</a>
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-question-sign tab-space"></i>HELP</a>
+                                    <a href="#" class="dash-a"><i class="glyphicon glyphicon-question-sign tab-space"></i>HELP</a>
                                 </li>
 
                                 <li>
@@ -172,7 +181,7 @@
 
                                             <div class="col-md-8">
                                                 <div class="row item-detail">
-                                                    <h1><a href="<?php echo base_url('view-details');?>/{{data.id}}">{{data.title}}</a></h1>
+                                                    <h1><a class="hoverTitle" href="<?php echo base_url('view-details');?>/{{data.id}}">{{data.title}}</a></h1>
                                                 </div>
                                                 
                                                 <div class="row item-detail">

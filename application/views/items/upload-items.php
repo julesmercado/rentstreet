@@ -1,11 +1,30 @@
- <!-- Navigation -->
-
-    <nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-cuz">
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><a class="navbar-brand"
+                <form action="<?php echo base_url('search-output-page'); ?>" method="get">
+                <div class="col-md-2"><a class="navbar-brand"
                 href='<?php echo base_url('main-page'); ?>'>RentStreet.ph</a></div>
-                <div class="col-md-6"></div><div class="cssmenu-cuz" id="cssmenu">
+                 
+                <div class="col-md-7 row-cuz-header">
+                    <div class="row ">
+                        <div class="col-md-5 margin-bottom">
+                            <select class="cat-cover2">
+                                  <option ng-repeat="data in getCategories | filter: query"  value="{{data.id}}">{{data.category}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5 margin-bottom" >
+                            <input class="search-text2" placeholder=
+                            "What are you looking for?" id="textVal" type="text" name="search">
+                        </div>
+                        <div class="col-md-2 margin-bottom" >
+                            <button class="btn-search-new"><i class="glyphicon glyphicon-search icon-search-cuz"></i></button>
+                            <!-- <input class="btn btn-default btn-lg btn-search" id="changeVal" type=
+                            "submit"><i class="glyphicon glyphicon-search"></i> -->
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="col-md-3"></div><div class="cssmenu-cuz" id="cssmenu">
                 <ul>
                     <li class='active has-sub'>
                         <a href='<?php echo base_url('member-page'); ?>'><?php echo $username; ?></a>
@@ -16,7 +35,7 @@
                             </li>
 
                             <li class="dropdown">
-                                <a href="<?php echo base_url('my-ads'); ?>">Advertisement</a>
+                                <a href="#">Advertisement</a>
                                 <ul class="dropdown-menu">
                                        
                                     <li>
@@ -27,6 +46,9 @@
                                     </li>
                                     <li>
                                         <a href='<?php echo base_url('returned-items'); ?>'>Returned Items</a>
+                                    </li>
+                                    <li>
+                                        <a href='<?php echo base_url('returned-items'); ?>'>Post Items</a>
                                     </li>
                                 </ul>
                             </li>
@@ -51,48 +73,20 @@
                         </ul>
                     </li>
 
-                    <li >
-                       <a href="#" id="msg">Notification <span id="nbrmsg" class="badge">42</span></a>
+                    <li ng-init="getNotification(<?php echo $user_id; ?>)">
+                       <a href="<?php echo base_url('notifications'); ?>" id="msg">Notification <span id="nbrmsg" class="badge">{{count}}</span></a>
                     </li>
-                    <li><input class="btn btn-post-header-cuz" type="button" value=
-                    "Post Now Your Item!">
-                    </li>
+                    
                 </ul>
             </div>
+          
             </div>
+            
         </div>
     </nav>
 
     <div class="content-section-a">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 margin-bottom">
-                    <h1>Upload Item</h1>
-                </div>
-
-                <div class="col-md-9 margin-top">
-                    <div class="col-md-5 margin-bottom">
-                        <select class="cat-cover2" name="category">
-                        <?php foreach ($categories as $item) {
-                            echo "<option value=\"".$item->id."\">";
-                            echo $item->category;
-                            echo "</option>";
-                        }?>
-                    </select>
-                    </div>
-
-                    <div class="col-md-5 margin-bottom">
-                        <input class="search-text2" placeholder=
-                        "What are you looking for?" type="text">
-                    </div>
-
-                    <div class="col-md-2 margin-bottom">
-                        <input class="btn btn-default btn-lg btn-search" type=
-                        "button" value="Search">
-                    </div>
-                </div>
-            </div>
-
             <div class="row">
                 <hr class="intro-divider">
             </div>
@@ -103,7 +97,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading p-heading-mp">
-                                    UPLOAD YOUR ITEM HERE
+                                   <!--  UPLOAD YOUR ITEM HERE -->
                                 </div>
 
                                 <div class="panel-body">
@@ -112,8 +106,7 @@
                                         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>"/>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h4>1. Select Your
-                                                Category</h4>
+                                                <h5>1. SELECT YOUR CATEGORY</h5>
                                             </div>
                                         </div>
 
@@ -132,12 +125,8 @@
 
                                             <div class=
                                             "col-md-6 sel-selectcat">
-                                                <select name="category" ng-model="category">
-                                                    <?php foreach ($categories as $item) {
-                                                        echo "<option value=\"".$item->id."\">";
-                                                        echo $item->category;
-                                                        echo "</option>";
-                                                    }?>
+                                                <select name="category_id">
+                                                    <option ng-repeat="data in getCategories | filter: query" value="{{data.id}}">{{data.category}}</option>
                                                 </select>
                                             </div>
 
@@ -146,7 +135,7 @@
 
                                         <div class="row row-margin-top-ui">
                                             <div class="col-md-12">
-                                                <h4>2. Upload Your Items</h4>
+                                                <h5>2. UPLOAD YOUR ITEMS</h5>
                                             </div>
                                         </div>
 
@@ -233,7 +222,7 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h4>3. Describe Your Item</h4>
+                                                <h5>3. DESCRIBE YOUR ITEM</h5>
                                             </div>
                                         </div>
 
@@ -273,22 +262,11 @@
 
                                                     <div class=
                                                     "col-md-6 price-mod">
-                                                        <select name="daily" ng-model="daily">
-                                                    <option value="Daily">
-                                                        Daily
+                                                        <select name="modePayment" ng-init="getModePayment()">
+                                                    <option ng-repeat ="data in getModePay | filter: query" value="{{data.id}}">
+                                                        {{data.mode_payment}}
                                                     </option>
-                                                    <option value="Weekly">
-                                                        Weekly
-                                                    </option>
-                                                    <option value="Monthly">
-                                                        Monthly
-                                                    </option>
-                                                    <option value="Quarterly">
-                                                        Quarterly
-                                                    </option>
-                                                    <option value="Yearly">
-                                                        Yearly
-                                                    </option>
+                                                   
                                                 </select>
                                                     </div>
                                                 </div>
@@ -350,48 +328,48 @@
             <!-- Footer -->
 
             <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="#home">About Us</a>
-                                </li>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a class="footer-li" href="#home">About Us</a>
+                        </li>
 
-                                <li class="footer-menu-divider">&sdot;</li>
+                        <li class="footer-menu-divider">&sdot;</li>
 
-                                <li>
-                                    <a href="#about">Rules</a>
-                                </li>
+                        <li>
+                            <a class="footer-li" href="#about">Rules</a>
+                        </li>
 
-                                <li class="footer-menu-divider">&sdot;</li>
+                        <li class="footer-menu-divider">&sdot;</li>
 
-                                <li>
-                                    <a href="#services">Rent Safely</a>
-                                </li>
+                        <li>
+                            <a class="footer-li" href="#services">Rent Safely</a>
+                        </li>
 
-                                <li class="footer-menu-divider">&sdot;</li>
+                        <li class="footer-menu-divider">&sdot;</li>
 
-                                <li>
-                                    <a href="#contact">Costumer Services</a>
-                                </li>
+                        <li>
+                            <a class="footer-li" href="#contact">Costumer Services</a>
+                        </li>
 
-                                <li class="footer-menu-divider">&sdot;</li>
+                        <li class="footer-menu-divider">&sdot;</li>
 
-                                <li>
-                                    <a href="#contact">Careers</a>
-                                </li>
+                        <li>
+                            <a class="footer-li" href="#contact">Careers</a>
+                        </li>
 
-                                <li class="footer-menu-divider">&sdot;</li>
+                        <li class="footer-menu-divider">&sdot;</li>
 
-                                <li>
-                                    <a href="#contact">Help</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a class="footer-li" href="#contact">Help</a>
+                        </li>
+                    </ul>
 
-                            <p class="copyright text-muted small">Copyright
-                            &copy; RentSteet.ph 2014. All Rights Reserved</p>
-                        </div>
-                    </div>
+                    <p class="copyright text-muted small">Copyright &copy;
+                    RentSteet.ph 2014. All Rights Reserved</p>
                 </div>
-            </footer>
+            </div>
+        </div>
+    </footer>

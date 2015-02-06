@@ -15,9 +15,11 @@
 
     <link href="<?php echo base_url('assets/css/app.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet">
-  
-    <script src="http://code.jquery.com/jquery-latest.min.js" type=
-    "text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery-latest.min.js'); ?>"></script>
+    <!-- Custom CSS -->
+
+    <!--<script src="http://code.jquery.com/jquery-latest.min.js" type=
+    "text/javascript"></script> -->
     <script src="<?php echo base_url('assets/js/script.js'); ?>"></script><!-- Custom CSS -->
     <!-- Custom Fonts -->
     <link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type=

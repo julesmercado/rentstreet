@@ -14,12 +14,8 @@ session_start();
                     <div class="row ">
                         <div class="col-md-5 margin-bottom">
                             <select class="cat-cover2" name="category">
-                            <?php foreach ($categories as $item) {
-                                echo "<option value=\"".$item->id."\">";
-                                echo $item->category;
-                                echo "</option>";
-                            }?>
-                        </select>
+                                 <option ng-repeat="data in getCategories | filter: query" value="{{data.id}}">{{data.category}}</option>
+                            </select>
                         </div>
                         <div class="col-md-5 margin-bottom" >
                             <input class="search-text2" placeholder=
@@ -83,7 +79,7 @@ session_start();
                         </ul>
                     </li>
 
-                    <li ng-init="getNotification(<?php echo $user_id; ?>">
+                    <li ng-init="getNotification(<?php echo $user_id; ?>)">
                        <a href="<?php echo base_url('notifications'); ?>" id="msg">Notification <span id="nbrmsg" class="badge">{{count}}</span></a>
                     </li>
                     
@@ -141,11 +137,14 @@ session_start();
                          
 
                         <div class="row row-top-margin">
-                            <div class="col-md-6">
-                                <p>{{data.title}}</p>
+                            <div class="col-md-12">
+                                <p class="title-sr">{{data.title}}</p>
                             </div>
 
-                            <div class="col-md-6">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <p class="price-hp">₱ {{data.price}} | {{data.mode}} </p>
                             </div>
                         </div>

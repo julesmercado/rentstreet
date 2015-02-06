@@ -66,6 +66,7 @@ $route = array(
 				'search-output-page'  => "items/searchOutputPage",
 				'notifications'       => "items/notifications",
 				'view-other-profile/(:num)'  => "accounts/viewOtherProfile/$1",
+				'rate-itemandclient/(:num)'  => "accounts/rateIfReturn/$1",
 				'404_override' 		  => ""
 	);
 

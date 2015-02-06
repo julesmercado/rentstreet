@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-cuz">
         <div class="container">
             <div class="row">
-               <form novalidate ng-submit="submitSearch( )" ng-init="userInit('<?php echo $searchKey;?>')">
+                <form action="<?php echo base_url('search-output-page'); ?>" method="get">
                 <div class="col-md-2"><a class="navbar-brand"
                 href='<?php echo base_url('main-page'); ?>'>RentStreet.ph</a></div>
                  
@@ -14,11 +14,10 @@
                         </div>
                         <div class="col-md-5 margin-bottom" >
                             <input class="search-text2" placeholder=
-                            "What are you looking for?" id="textVal" type="text" name="search" value="<?php echo $searchKey; ?>" ng-model="search.search_item">
+                            "What are you looking for?" id="textVal" type="text" name="search">
                         </div>
                         <div class="col-md-2 margin-bottom" >
-                            <button class="btn-search-new" id="changeVal" type=
-                            "submit"><i class="glyphicon glyphicon-search icon-search-cuz"></i></button>
+                            <button class="btn-search-new"><i class="glyphicon glyphicon-search icon-search-cuz"></i></button>
                             <!-- <input class="btn btn-default btn-lg btn-search" id="changeVal" type=
                             "submit"><i class="glyphicon glyphicon-search"></i> -->
                         </div>
@@ -74,8 +73,8 @@
                         </ul>
                     </li>
 
-                    <li >
-                       <a href="#" id="msg">Notification <span id="nbrmsg" class="badge">42</span></a>
+                    <li ng-init="getNotification(<?php echo $user_id; ?>)">
+                       <a href="<?php echo base_url('notifications'); ?>" id="msg">Notification <span id="nbrmsg" class="badge">{{count}}</span></a>
                     </li>
                     
                 </ul>
@@ -88,7 +87,7 @@
      <div class="row">
                 <hr class="intro-divider">
             </div>
-    <div class="content-section-a">
+    <div class="content-section-a" ng-init="getSingleItem(<?php echo $details->id; ?>)">
         <div class="container">
             <div class="col-dashboard panel panel-default col-dashboard-cuz panel-body-cuz">
                 <div class="panel-heading p-heading-d-mp">
@@ -106,18 +105,8 @@ if($images != null){
         $path_url[$i] = "http://localhost".$img[1];    
         $i++;
     }
-$picture = $this->db->where('user_id',$details->user_id)->get('clients')->result();
-    foreach ($picture as $client) {
-        if($client->images != null) {
-         $img = explode('C:/wamp/www',$client->images);
-        $profile = "http://localhost".$img[1];
-        } else {
-         $profile = "http://localhost/rentstreet.ph/assets/img/user.png";
-        }
-    }
-$category = $this->db->where('id',$details->cat_id)->get('category')->result();
-    foreach ($category as $cat) {
-    }
+
+
 }
 ?>
             <div class="carousel-container">
@@ -197,7 +186,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                 <h5>Desciption</h5>
                             </div>
                             <div class="row desc-vi">
-                                <p><span><?php echo $details->description; ?></span></p>
+                                <p><span>{{itemDetails.description}}</span></p>
                             </div>
                        
                     </div>
@@ -234,7 +223,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Price:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span>₱ <?php echo $details->price; ?></span>
+                                        <span>₱ {{itemDetails.price}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -242,7 +231,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Mode Of Payment</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $details->daily; ?></span>
+                                        <span>{{itemDetails.mode}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -250,7 +239,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Contact Number:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $client->contact; ?></span>
+                                        <span>{{itemDetails.contact}}</span>
                                     </div>
                                 </div>
 
@@ -259,7 +248,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Date Posted:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $details->created_on; ?></span>
+                                        <span>{{itemDetails.created_on}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -267,7 +256,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Status:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span>Available</span>
+                                        <span>{{itemDetails.status}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -275,7 +264,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Location:</label>
                                     </div>
                                     <div class="col-md-7">
-                                       <span><?php echo $details->location; ?></span>
+                                       <span>{{itemDetails.location}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -283,7 +272,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Ad ID:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $details->id; ?></span>
+                                        <span>{{itemDetails.id}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -291,7 +280,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Category:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $cat->category; ?></span>
+                                        <span>{{itemDetails.category}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -305,14 +294,14 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                 BASIC INFORMATION
                             </div>
 
-                            <div class="panel-body">
+                            <div class="panel-body" ng-init="getSingleInfoRequest(<?php echo $details->user_id; ?>)">
                                 <div class="row">
                                     <div class="col-md-7 prof-img-vi">
-                                        <img class="img-profile-ui img-circle"  src="<?php echo $profile; ?>">
+                                        <img class="img-profile-ui img-circle"  ng-src="{{requestSingleInfo[0].images}}">
                                     </div>
                                     <div class="col-md-5 col-user-vi">
-                                        <span><?php echo $client->username ?></span>
-                                        <p><?php echo $client->name; ?></p>
+                                        <span>{{requestSingleInfo[0].username}}</span>
+                                        <p>{{requestSingleInfo[0].name}}    </p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -320,7 +309,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Email Address:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $client->email; ?></span>
+                                        <span>{{requestSingleInfo[0].email}}</span>
                                     </div>
                                 </div>
 
@@ -329,7 +318,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Date Registered:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $client->registered_on; ?></span>
+                                        <span>{{requestSingleInfo[0].registered_on}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -337,7 +326,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Address:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <span><?php echo $client->address; ?></span>
+                                        <span>{{requestSingleInfo[0].address}}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -345,7 +334,7 @@ $category = $this->db->where('id',$details->cat_id)->get('category')->result();
                                         <label>Last login:</label>
                                     </div>
                                     <div class="col-md-7">
-                                       <span><?php echo $client->last_login; ?></span>
+                                       <span>{{requestSingleInfo[0].last_login}}</span>
                                     </div>
                                 </div>
                                 <div class="row">

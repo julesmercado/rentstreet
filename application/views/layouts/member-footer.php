@@ -1,5 +1,5 @@
 <!-- jQuery -->
-	 <script src="<?php echo base_url('assets/js/angular.min.js'); ?>" type=
+	<script src="<?php echo base_url('assets/js/angular.min.js'); ?>" type=
     "text/javascript"></script>
     <script src="<?php echo base_url('assets/js/angular-sanitize.min.js'); ?>"></script> 
     <script src="<?php echo base_url('assets/js/angular-strap.js'); ?>"></script> 

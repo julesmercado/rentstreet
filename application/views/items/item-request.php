@@ -108,7 +108,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <button class="btn btn-accept" ng-click="acceptButton(data.borrowers_id, data.owners_id, data.items_id)">Accept</button>
-                                                    <button class="btn btn-ignore">Ignore</button>
+                                                    <button class="btn btn-ignore" ng-click="declineButton(data.borrowers_id, data.owners_id, data.items_id)">Decline</button>
                                                 </div>
                                             
                                             </div>

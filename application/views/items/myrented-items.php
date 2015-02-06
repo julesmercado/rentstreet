@@ -103,15 +103,15 @@
                 <div class="container">
                     <div class="row container-mp">
                         <div class="col-md-3">
-                        <div class=" panel panel-default">
-                        <div class="panel-heading p-heading-d-mp">
+                        <div class=" panel panel-default panel-body-cuz">
+                        <div class="panel-heading p-heading-d-mp ">
                             DASHBOARD
                         </div>
 
-                        <div class="panel-body panel-body-cuz">
-                            <ul class="nav nav-pills nav-stacked ul-cuz">
+                        <div class="panel-body ">
+                            <ul class="nav nav-pills nav-pills-cuz nav-stacked ul-cuz">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large tab-space"></i>ADVERTISEMENTS</a>
+                                    <a href="#" class="dropdown-toggle dash-a" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large tab-space"></i>ADVERTISEMENTS</a>
                                     <ul class="dropdown-menu dropdown-menu-cuz">
                                       
                                         <li>
@@ -123,23 +123,26 @@
                                         <li>
                                             <a href='<?php echo base_url('returned-items'); ?>'><i class="glyphicon glyphicon-indent-left tab-space"></i>RETURNED ITEMS</a>
                                         </li>
+                                        <li>
+                                            <a href='<?php echo base_url('upload-items'); ?>'><i class="glyphicon glyphicon-indent-left tab-space"></i>POST YOUR ITEM</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href='<?php echo base_url('my-ads'); ?>'><i class="glyphicon glyphicon-tags tab-space"></i>MANAGE ADS</a>
+                                    <a href='<?php echo base_url('my-ads'); ?>' class="dash-a"><i class="glyphicon glyphicon-tags tab-space"></i>MANAGE ADS</a>
                                 </li>
 
                                 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-share tab-space"></i>RETURN ITEMS</a>
+                                    <a href="#" class="dash-a"><i class="glyphicon glyphicon-share tab-space"></i>RETURN ITEMS</a>
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo base_url('my-profile'); ?>"><i class="glyphicon glyphicon-user tab-space"></i>PROFILE</a>
+                                    <a href="<?php echo base_url('my-profile'); ?>" class="dash-a"><i class="glyphicon glyphicon-user tab-space"></i>PROFILE</a>
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class="glyphicon glyphicon-question-sign tab-space"></i>HELP</a>
+                                    <a href="#" class="dash-a"><i class="glyphicon glyphicon-question-sign tab-space"></i>HELP</a>
                                 </li>
 
                                 <li>
@@ -164,35 +167,39 @@
                                         <div class="row ">
                                        
 
-                                            <div class="row" ng-repeat="data in myAdsList | filter: query">
+                                            <div class="row" ng-repeat="data in myRentedAdsList | filter: query">
                                                 <div class="col-md-4 img-bi">
                                                     <div class="center-img-ma">
-                                                        <img alt="" ng-src="{{data.item_path}}"/>
+                                                        <img alt="" ng-src="{{data.items_path}}"/>
                                                     </div>
                                                     
                                                 </div>
 
                                             <div class="col-md-8">
                                                 <div class="row item-detail">
-                                                    <h1>{{data.title}}</h1>
+                                                    <h1><a class="hoverTitle" href="<?php echo base_url('view-details')?>/{{data.items_id}}">{{data.items_title}}</a></h1>
                                                 </div>
                                                 
                                                 <div class="row item-detail">
-                                                    <h2><h2>₱ {{data.price}} | {{data.mode}}</h2></h2>
+                                                    <h2><h2>₱ {{data.items_price}} | {{data.mode}}</h2></h2>
                                                 </div>
                                                 
                                                 <div class="row item-detail">
-                                                   <p>Rentee: Bertwin Romero | <a href="#">View More Information</a></p>
+                                                   <p>Rentee: {{" " + data.borrowers_name + " "}}| <a href="<?php echo base_url('view-other-profile'); ?>/{{data.borrowers_id}}">View More Information</a></p>
                                                 </div>
-
+                                                <div class="row item-detail">
+                                                   
+                                                    <a class="btn btn-sbr btn-returned" href="<?php echo base_url('rate-itemandclient');?>/{{data.id}}">Returned</a>
+                                                    <!-- <button class="btn btn-sbr btn-returned" ng-click="returnedAds(data.items_id, <?php echo $user_id; ?>)">Returned</button> -->
+                                                </div>
                                                 <div class=
                                                 "row item-detail item-bi-margin">
-                                                <a href="">
+                                                <a href="<?php echo base_url('view-details');?>/{{data.items_id}}">
                                                     <h5>More Ad
                                                     Details</h5></a>
 
-                                                    <p>From: January 1, 2014
-                                                    To: April 1, 2014</p>
+                                                <p>From: {{data.date_from}}
+                                                    To: {{data.date_to}}</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-5 col-sm-6 spacer-center">
@@ -214,43 +221,43 @@
     </div><!-- Footer -->
     <!-- Footer -->
 
-    <footer>
+     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-inline">
                         <li>
-                            <a href="#home">About Us</a>
+                            <a class="footer-li" href="#home">About Us</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#about">Rules</a>
+                            <a class="footer-li" href="#about">Rules</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#services">Rent Safely</a>
+                            <a class="footer-li" href="#services">Rent Safely</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Costumer Services</a>
+                            <a class="footer-li" href="#contact">Costumer Services</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Careers</a>
+                            <a class="footer-li" href="#contact">Careers</a>
                         </li>
 
                         <li class="footer-menu-divider">&sdot;</li>
 
                         <li>
-                            <a href="#contact">Help</a>
+                            <a class="footer-li" href="#contact">Help</a>
                         </li>
                     </ul>
 

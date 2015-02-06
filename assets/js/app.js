@@ -1,5 +1,8 @@
 
-var myApp = angular.module( "myApp", ['ngSanitize','mgcrea.ngStrap'] );
+var myApp = angular.module( "myApp", ['ngSanitize','mgcrea.ngStrap']);
+
+
+
 
 myApp.config(function($datepickerProvider) {
   angular.extend($datepickerProvider.defaults, {
@@ -12,6 +15,26 @@ myApp.controller('myController', function($scope, $http, getUrl){
     $scope.search;  
     $scope.data_items = [];
     var key = 0;
+    
+
+
+$scope.rate = 7;
+  $scope.max = 10;
+  $scope.isReadonly = false;
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  };
+
+  $scope.ratingStates = [
+    {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+    {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+    {stateOn: 'glyphicon-heart'},
+    {stateOff: 'glyphicon-off'}
+  ];
+    
     
 $scope.selectedDate = new Date();
   $scope.selectedDateAsNumber = Date(1986, 1, 22);
@@ -82,7 +105,7 @@ $scope.selectedDate = new Date();
     $scope.getNotification = function(userId){
 
         
-        console.log(userId);
+       
         $http.post(getUrl.url + '/items/countNotification', userId)
                     .success(function onSuccess(response){
                         
@@ -104,15 +127,12 @@ $scope.selectedDate = new Date();
                             src = data[x].img_path.substring(42, data[x].img_path.length);
                             $scope.requestInfo[x].img_path = "http://localhost/rentstreet.ph/assets/profiles/" + src;
                         }
-                            console.log($scope.requestInfo);
-                        // console.log(response);
-                        // $scope.notificationInfo = response;
+                          
                         
          });
     }
 
     $scope.getSingleInfoRequest = function(userId){
-
        
         $http.post(getUrl.url + '/items/getOtherInfo',userId)
                     .success(function onSuccess(response){
@@ -123,12 +143,16 @@ $scope.selectedDate = new Date();
                             src = data[0].images.substring(42, data[0].images.length);
                             $scope.requestSingleInfo[0].images = "http://localhost/rentstreet.ph/assets/profiles/" + src;
                     
-                            console.log($scope.requestSingleInfo);
-                        // console.log(response);
+                       
+                         console.log(response);
                         // $scope.notificationInfo = response;
                         
          });
     }
+
+    // $scope.getClientInfoOnly = function (id){
+    //     console.log(id);
+    // }
 
 
     $scope.getMyAds = function (userId){
@@ -137,6 +161,7 @@ $scope.selectedDate = new Date();
 
         $http.post(getUrl.url + '/items/getMyAds', userId)
             .success(function onSuccess(response){
+                // console.log(response);
                 var data = response;
                 $scope.myAdsList = response;
                 var src;
@@ -144,28 +169,88 @@ $scope.selectedDate = new Date();
                     src = data[x].item_path.substring(41, data[x].item_path.length);
                     $scope.myAdsList[x].item_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
                 }
-                        
+                console.log($scope.myAdsList);
                         
          });
     }
 
     $scope.getMyRentedItems = function (userId) {
 
+        //console.log(userId);
         $http.post(getUrl.url + '/items/getMyRentedAds', userId)
             .success(function onSuccess(response){
                 var data = response;
                 $scope.myRentedAdsList = response;
                 var src;
                 for(var x in data) {
-                    src = data[x].item_path.substring(41, data[x].item_path.length);
-                    $scope.myRentedAdsList[x].item_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
+                    src = data[x].items_path.substring(41, data[x].items_path.length);
+                    $scope.myRentedAdsList[x].items_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
                 }
-
                 console.log($scope.myRentedAdsList);
                         
                         
          });
 
+        
+    }
+
+    $scope.getRateAfterReturnIfo = function (rentedId) {
+       $http.post(getUrl.url + '/items/getRateAfterReturnInfo', rentedId)
+            .success(function onSuccess(response){
+              
+                $scope.rateAfterReturn = response;
+                var src;
+                var data = response;
+                var src2;
+                var data2 = response;
+                
+                    src = data[0].item_path.substring(41, data[0].item_path.length);
+                    $scope.rateAfterReturn[0].item_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
+
+                    src2 = data2[0].img_path.substring(42, data2[0].img_path.length);
+                    $scope.rateAfterReturn[0].img_path = "http://localhost/rentstreet.ph/assets/profiles/" + src2;
+                
+                console.log($scope.rateAfterReturn);
+                        
+                        
+         });
+    }
+
+    $scope.getBorrowedFromOther = function (userId) {
+        $http.post(getUrl.url + '/items/getBorrowedFromOther', userId)
+            .success(function onSuccess(response){
+                var data = response;
+                $scope.borrowOther = response;
+                var src;
+                
+                    src = data[0].items_path.substring(41, data[0].items_path.length);
+                    $scope.borrowOther[0].items_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
+                
+                console.log($scope.borrowOther);
+                        
+                        
+         });
+
+    }
+
+    $scope.getMyReturnedItems = function (userId) {
+
+        console.log(userId);
+        $http.post(getUrl.url + '/items/getMyReturnedAds', userId)
+            .success(function onSuccess(response){
+                var data = response;
+                $scope.myReturnedList = response;
+                var src;
+                for(var x in data) {
+                    src = data[x].items_path.substring(41, data[x].items_path.length);
+                    $scope.myReturnedList[x].items_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
+                }
+                //console.log($scope.myReturnedList);
+                        
+                        
+         });
+
+        
     }
 
 
@@ -268,7 +353,7 @@ $scope.selectedDate = new Date();
     $scope.getCatOnly = function (){
         $http.post(getUrl.url + '/items/getCatOnly',$scope.dataRequest)
                     .success(function onSuccess(response){
-                        console.log(response);
+                            
                         $scope.getCategories = response;
                         
          });
@@ -276,11 +361,22 @@ $scope.selectedDate = new Date();
         
     }
 
+    $scope.getModePayment = function(){
+
+
+        $http.post(getUrl.url + '/items/getMode',$scope.dataRequest)
+                    .success(function onSuccess(response){
+                      
+                        $scope.getModePay = response;
+                        
+         });
+    }
+
     $scope.acceptButton = function ( borrowersId, userId, itemsId ) {
         
          $scope.dataRequest = {borrowers_id: borrowersId, items_id : itemsId};
 
-         console.log($scope.dataRequest);
+      
 
         // console.log(borrowers_id, items_id);
         $http.post(getUrl.url + '/items/acceptRequest', $scope.dataRequest)
@@ -293,6 +389,56 @@ $scope.selectedDate = new Date();
          });
 
     }
+
+    $scope.returnedAds = function (itemsId, userId) {
+
+   //      console.log(itemsId);
+
+       // $http.post(getUrl.url + '/accounts/rateIfReturn', itemsId);
+            
+        // $http.post(getUrl.url + '/items/returnItems', itemsId)
+        //             .success(function onSuccess(response){
+                      
+        //               $scope.getMyRentedItems(userId);
+        //  });
+    }
+
+    $scope.declineButton = function ( userId, clientId, itemId ) {
+        $scope.dataRequest = {borrowers_id: userId, items_id : itemId};
+            
+            console.log($scope.dataRequest);
+
+            $http.post(getUrl.url + '/accounts/declineRequest', $scope.dataRequest)
+                        .success(function onSuccess(response){
+                            
+                             $scope.test = response;
+                              $scope.getNotification(clientId);
+                             $scope.getAllInfoRequest(clientId);
+                            
+                            
+             });
+    }
+
+    $scope.getSingleItem= function (itemsId) {
+        
+      
+
+        $http.post(getUrl.url + '/items/getSingleItem', itemsId)
+                .success(function onSuccess(response){
+             
+                    var data = response;
+                    $scope.itemDetails = response;
+                
+                    
+                       var src = data.item_path.substring(41, data.item_path.length);
+                       $scope.itemDetails.item_path = "http://localhost/rentstreet.ph/assets/uploads/" + src;
+              
+
+                    // console.log($scope.itemDetails.item_path);          
+             });
+    }
+
+
 
 });
 
